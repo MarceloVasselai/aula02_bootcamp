@@ -197,11 +197,18 @@ finally:
     print("imprima esta frase sem espaços")
 
 # 14. Faça um programa que peça ao usuário para digitar uma data no formato "dd/mm/aaaa" e, em seguida, imprima o dia, o mês e o ano separadamente.
-data_usuario = input("Informe uma data no formato dd/mm/yyyy: ")
-lista_dia_mes_ano = data_usuario.split("/")
-print(f"O dia é: {lista_dia_mes_ano[0]}")
-print(f"O mês é: {lista_dia_mes_ano[1]}")
-print(f"O ano é: {lista_dia_mes_ano[2]}")
+try:
+    data_usuario = input("Informe uma data no formato dd/mm/yyyy: ")
+    lista_dia_mes_ano = data_usuario.split("/")
+    print(f"O dia é: {lista_dia_mes_ano[0]}")
+    print(f"O mês é: {lista_dia_mes_ano[1]}")
+    print(f"O ano é: {lista_dia_mes_ano[2]}")
+except TypeError as e:
+    print(e) # Imprimir msg de Erro.
+else:
+    print("sucesso")    
+finally:
+    print("separar datas")
 
 # 15. Escreva um programa que concatene duas strings fornecidas pelo usuário.
 try:
@@ -216,20 +223,188 @@ else:
 finally:
     print("concatene duas strings")
 
-
-
 # #### Booleanos (`bool`)
 
 # 16. Escreva um programa que avalie duas expressões booleanas inseridas pelo usuário e retorne o resultado da operação AND entre elas.
+
+try:
+    expressao1 = bool(input("Informe a primeira expressão booleana: "))
+    expressao2 = bool(input("Informe a segunda expressão booleana: "))
+    result = expressao1 and expressao2
+    print(result)
+except TypeError as e:
+    print(e) # Imprimir msg de Erro.
+else:
+    print("sucesso")    
+finally:
+    print("duas expressões booleanas AND")
+
 # 17. Crie um programa que receba dois valores booleanos do usuário e retorne o resultado da operação OR.
+try:
+    expressao1 = bool(input("Informe a primeira expressão booleana: "))
+    expressao2 = bool(input("Informe a segunda expressão booleana: "))
+    result = expressao1 or expressao2
+    print(result)
+except TypeError as e:
+    print(e) # Imprimir msg de Erro.
+else:
+    print("sucesso")    
+finally:
+    print("duas expressões booleanas OR")
+
 # 18. Desenvolva um programa que peça ao usuário para inserir um valor booleano e, em seguida, inverta esse valor.
+try:
+    expressao1 = bool(input("Informe a expressão booleana: "))
+       
+    result = not expressao1 
+    print(result)
+except TypeError as e:
+    print(e) # Imprimir msg de Erro.
+else:
+    print("sucesso")    
+finally:
+    print("duas expressões booleanas OR")
+
 # 19. Faça um programa que compare se dois números fornecidos pelo usuário são iguais.
+try:
+    num1 = int(input("Informe o primeiro number: "))
+    num2 = int(input("Informe o segundo number: "))
+    if num1 == num2:
+        result = True
+    else:
+        result = False    
+    print(result)
+except TypeError as e:
+    print(e) # Imprimir msg de Erro.
+else:
+    print("sucesso")    
+finally:
+    print("dois números fornecidos pelo usuário são iguais.")
+
 # 20. Escreva um programa que verifique se dois números fornecidos pelo usuário são diferentes.
+try:
+    num1 = int(input("Informe o primeiro number: "))
+    num2 = int(input("Informe o segundo number: "))
+    if num1 == num2:
+        result = True
+    else:
+        result = False    
+    print(result)
+except TypeError as e:
+    print(e) # Imprimir msg de Erro.
+else:
+    print("sucesso")    
+finally:
+    print("dois números fornecidos pelo usuário são iguais.")
 
 # #### try-except e if
 
 # 21: Conversor de Temperatura
+def celsius_p_fahrenheit(celsius):
+    return (celsius * 9/5) + 32
+
+def fahrenheit_p_celsius(fahrenheit):
+    return (fahrenheit - 32) * 5/9
+
+def celsius_p_kelvin(celsius):
+    return celsius + 273.15
+
+def kelvin_p_celsius(kelvin):
+    return kelvin - 273.15
+
+def fahrenheit_p_kelvin(fahrenheit):
+    celsius = fahrenheit_p_celsius(fahrenheit)
+    return celsius_p_kelvin(celsius)
+
+def kelvin_p_fahrenheit(kelvin):
+    celsius = kelvin_p_celsius(kelvin)
+    return celsius_p_fahrenheit(celsius)
+
+def menu():
+    print("Escolha a conversão:")
+    print("1 >> De Celsius para Fahrenheit")
+    print("2 >> De Fahrenheit para Celsius")
+    print("3 >> De Celsius para Kelvin")
+    print("4 >> De Kelvin para Celsius")
+    print("5 >> De Fahrenheit para Kelvin")
+    print("6 >> De Kelvin para Fahrenheit")
+    escolha = input("Escolha a opção: ")
+
+    valor = float(input("Digite a temperatura: "))
+
+    if escolha == '1':
+        print(f"{valor}°C será de {celsius_p_fahrenheit(valor)}°F")
+    elif escolha == '2':
+        print(f"{valor}°F será de {fahrenheit_p_celsius(valor)}°C")
+    elif escolha == '3':
+        print(f"{valor}°C será de {celsius_p_kelvin(valor)}K")
+    elif escolha == '4':
+        print(f"{valor}K será de {kelvin_p_celsius(valor)}°C")
+    elif escolha == '5':
+        print(f"{valor}°F será de {fahrenheit_p_kelvin(valor)}K")
+    elif escolha == '6':
+        print(f"{valor}K será de {kelvin_p_fahrenheit(valor)}°F")
+    else:
+        print("Ops, erro!")
+
+# Executar o menu
+menu()
+
 # 22: Verificador de Palíndromo
+def palindromo(texto):
+    # Remove espaços e converte para minúsculas.
+    texto_ajustado = texto.replace(" ", "").lower()
+    # Compara o texto original com sua versão invertida
+    return texto_ajustado == texto_ajustado[::-1] # significa que se deve retornar da primeira coluna até a coluna -1, que corresponde à última coluna
+
+# Entrada do usuário
+palavra = input("Digite uma palavra e veremos se é um palíndromo: ")
+
+# Verificação e resultado
+if palindromo(palavra):
+    print(f'"{palavra}" é um palíndromo!')
+else:
+    print(f'"{palavra}" não é um palíndromo!')
+
 # 23: Calculadora Simples
+def calculadora():
+    print("1 >> Adição (+)")
+    print("2 >> Subtração (-)")
+    print("3 >> Multiplicação (*)")
+    print("4 >> Divisão (/)")
+    print("5 >> Potência (**)")
+
+    # Solicitar a operação desejada
+    operacao = input("Escolha a operação (1/2/3/4/5): ")
+
+    # Solicitar os números
+    num1 = float(input("Digite o primeiro número: "))
+    num2 = float(input("Digite o segundo número: "))
+
+    # Realizar a operação escolhida
+    if operacao == '1':
+        resultado = num1 + num2
+        print(f"Resultado: {num1} + {num2} = {resultado}")
+    elif operacao == '2':
+        resultado = num1 - num2
+        print(f"Resultado: {num1} - {num2} = {resultado}")
+    elif operacao == '3':
+        resultado = num1 * num2
+        print(f"Resultado: {num1} * {num2} = {resultado}")
+    elif operacao == '4':
+        if num2 == 0:
+            print("Erro: Divisão por zero!")
+        else:
+            resultado = num1 / num2
+            print(f"Resultado: {num1} / {num2} = {resultado}")
+    elif operacao == '5':
+        resultado = num1 ** num2
+        print(f"Resultado: {num1} ** {num2} = {resultado}")
+    else:
+        print("Ops, operação inválida!")
+
+# Chamar a calculadora
+calculadora()
+
 # 24: Classificador de Números
 # 25: Conversão de Tipo com Validação
