@@ -407,4 +407,89 @@ def calculadora():
 calculadora()
 
 # 24: Classificador de Números
+def primo(numero):
+    """Verifica se um número é primo."""
+    if numero <= 1:
+        return False
+    for i in range(2, int(numero**0.5) + 1):
+        if numero % i == 0:
+            return False
+    return True
+
+def classificar_numero(numero):
+    """Classifica um número com base em suas propriedades."""
+    classificacoes = []
+
+    # Verifica se é positivo, negativo ou zero
+    if numero > 0:
+        classificacoes.append("positivo")
+    elif numero < 0:
+        classificacoes.append("negativo")
+    else:
+        classificacoes.append("zero")
+
+    # Verifica se é par ou ímpar (apenas para números inteiros)
+    if isinstance(numero, int):
+        if numero % 2 == 0:
+            classificacoes.append("par")
+        else:
+            classificacoes.append("ímpar")
+
+    # Verifica se é primo (apenas para números inteiros positivos)
+    if isinstance(numero, int) and numero > 1 and primo(numero):
+        classificacoes.append("primo")
+
+    # Verifica se é múltiplo de 5
+    if isinstance(numero, int) and numero % 5 == 0:
+        classificacoes.append("múltiplo de 5")
+
+    return classificacoes
+
+# Entrada do usuário
+try:
+    numero = float(input("Digite um número: "))
+    if numero == int(numero):  # Verifica se é um número inteiro
+        numero = int(numero)
+    classificacoes = classificar_numero(numero)
+    print(f"O número {numero} é: {', '.join(classificacoes)}")
+except ValueError:
+    print("Entrada inválida. Por favor, digite um número.")
+
 # 25: Conversão de Tipo com Validação
+def converter_tipo(valor, tipo):
+    """
+    Tenta converter um valor para o tipo especificado.
+    Retorna o valor convertido se bem-sucedido, ou None se falhar.
+    """
+    try:
+        if tipo == "int":
+            return int(valor)
+        elif tipo == "float":
+            return float(valor)
+        elif tipo == "str":
+            return str(valor)
+        else:
+            print("Tipo de conversão inválido.")
+            return None
+    except ValueError:
+        print(f"Erro: Não foi possível converter '{valor}' para {tipo}.")
+        return None
+
+def main():
+    print("Bem-vindo ao Conversor de Tipos com Validação!")
+    print("Tipos disponíveis: int, float, str")
+
+    # Solicitar entrada do usuário
+    valor = input("Digite um valor: ")
+    tipo = input("Para qual tipo deseja converter? (int/float/str): ").lower()
+
+    # Realizar a conversão
+    valor_convertido = converter_tipo(valor, tipo)
+
+    # Exibir o resultado
+    if valor_convertido is not None:
+        print(f"Valor convertido: {valor_convertido} (tipo: {type(valor_convertido).__name__})")
+
+# Executar o programa
+if __name__ == "__main__":
+    main()
